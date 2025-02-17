@@ -1,0 +1,137 @@
+﻿@model Emp_Management_project.Models.DTOs.EmployeeDTO
+
+@{
+    ViewData["Title"] = "Upsert";
+    var title = Model.Id != 0 ? "Edit Employee" : "New Employee"; 
+}
+
+<form method="post" id="employeeForm" style="margin-left:3.4cm">
+    <div class="row">
+        <div class="col-10 border-bottom">
+            <h2 class="text-primary"><b>@title</b></h2>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+
+    <div class="col-8">
+        <input type="hidden" asp-for="Id" />
+
+        <!-- Full Name -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="FirstName"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="FirstName" id="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="Email"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Email" id="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="Gender"></label>
+            </div>
+            <div class="col-8">
+                <select asp-for="Gender" class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Address -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="Address"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Address" id="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Contact -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="Contact"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Contact" id="Contact" class="form-control" />
+                <span asp-validation-for="Contact" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Department -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label for="DepartmentId">Department</label>
+            </div>
+            <div class="col-8">
+                <select asp-for="DepartmentId" class="form-control" asp-items="ViewBag.Departments">
+                    <option value="">Select Department</option>
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Team -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label for="TeamId">Team</label>
+            </div>
+            <div class="col-8">
+                <select asp-for="TeamId" class="form-control" asp-items="ViewBag.Teams">
+                    <option value="">Select Team</option>
+                </select>
+                <span asp-validation-for="TeamId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Position -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label for="PositionId">Position</label>
+            </div>
+            <div class="col-8">
+                <select asp-for="PositionId" class="form-control" asp-items="ViewBag.Positions">
+                    <option value="">Select Position</option>
+                </select>
+                <span asp-validation-for="PositionId" class="text-danger"></span>
+            </div>
+        </div>
+
+
+        <!-- Submit Button -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-8 offset-4">
+                @if (Model.Id != 0)
+                {
+                    <partial name="_EditAndBackListButtons" />
+                }
+                else
+                {
+                    <partial name="_CreateAndBackToListButtons" />
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Employee.js"></script>
+}

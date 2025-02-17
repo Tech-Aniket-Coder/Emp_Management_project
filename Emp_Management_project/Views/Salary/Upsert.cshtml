@@ -1,0 +1,61 @@
+﻿@model Emp_Management_project.Models.DTOs.SalaryDTO
+
+@{
+    ViewData["Title"] = "Upsert";
+    var title = Model.Id != 0 ? "Edit Salary" : "New Salary";
+}
+
+<form method="post" id="salaryForm" style="margin-left:3.4cm">
+    <div class="row">
+        <div class="col-10 border-bottom">
+            <h2 class="text-primary"><b>@title</b> </h2>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+
+    <div class="col-8">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="EmployeeId" />
+        <!-- Amount Field -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="Amount"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Amount" id="Amount" class="form-control"/>
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Effective Date Field -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="EffectiveDate"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="EffectiveDate" type="date" class="form-control" />
+                <span asp-validation-for="EffectiveDate" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Submit/Cancel Buttons -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-8 offset-4">
+                @if (Model.Id != 0)
+                {
+                    <partial name="_EditAndBackListButtons" />
+                }
+                else
+                {
+                    <partial name="_CreateAndBackToListButtons" />
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Salary.js"></script>
+}

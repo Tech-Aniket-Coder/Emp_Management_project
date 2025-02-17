@@ -1,0 +1,60 @@
+﻿@model Emp_Management_project.Models.DTOs.PositionDTO
+
+@{
+    ViewData["Title"] = "Upsert";
+    var title = Model.Id != 0 ? "Edit Position" : "New Position";
+}
+
+<form method="post" id="employeeForm" style="margin-left:3.4cm">
+    <div class="row">
+        <div class="col-10 border-bottom">
+            <h2 class="text-primary"><b>@title</b></h2>
+        </div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    </div>
+
+    <div class="col-8">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label asp-for="Title"></label>
+            </div>
+            <div class="col-8">
+                <input asp-for="Title" id="Name" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+        </div>
+
+        <!-- Department Dropdown -->
+        <div class="form-group row p-2 m-2">
+            <div class="col-4">
+                <label for="TeamId">Team</label>
+            </div>
+            <div class="col-8">
+                <select asp-for="TeamId" class="form-control" asp-items="ViewBag.Teams">
+                    <option value="">Select Team</option>
+                </select>
+                <span asp-validation-for="TeamId" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="form-group row p-2 m-2">
+            <div class="col-8 offset-4">
+                @if (Model.Id != 0)
+                {
+                    <partial name="_EditAndBackListButtons" />
+                }
+                else
+                {
+                    <partial name="_CreateAndBackToListButtons" />
+                }
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/Position.js"></script>
+}
